@@ -1,3 +1,12 @@
-{
-    "content": "/** @type {import('next').NextConfig} */\nconst nextConfig = {\n  reactStrictMode: true,\n  swcMinify: true,\n};\n\nmodule.exports = nextConfig;"
-  }
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  webpack: (config) => {
+    config.externals.push({
+      'sharp': 'commonjs sharp',
+      'canvas': 'commonjs canvas',
+    });
+    return config;
+  },
+};
+
+module.exports = nextConfig;
