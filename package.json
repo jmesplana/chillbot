@@ -1,27 +1,72 @@
 {
-  "name": "nextjs",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+  "Project Structure": {
+    "root": {
+      "package.json": "Main npm configuration file",
+      "vercel.json": "Vercel deployment configuration",
+      "next.config.js": "Next.js configuration",
+      "postcss.config.js": "PostCSS configuration for Tailwind",
+      "tailwind.config.js": "Tailwind CSS configuration",
+      ".env.local": "Local environment variables (do not commit)",
+      ".gitignore": "Git ignore configuration"
+    }
   },
-  "dependencies": {
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.1.6"
+  
+  "package.json": {
+    "name": "browser-agent-chat",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+      "dev": "next dev",
+      "build": "next build",
+      "start": "next start",
+      "lint": "next lint"
+    },
+    "dependencies": {
+      "@vercel/edge": "^1.1.1",
+      "langchain": "^0.1.21",
+      "langchain-openai": "^0.0.14",
+      "lucide-react": "^0.330.0",
+      "next": "14.1.0",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+      "@types/node": "^20.11.17",
+      "@types/react": "^18.2.55",
+      "autoprefixer": "^10.4.17",
+      "postcss": "^8.4.35",
+      "tailwindcss": "^3.4.1",
+      "typescript": "^5.3.3"
+    }
   },
-  "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.6",
-    "@eslint/eslintrc": "^3"
+
+  "vercel.json": {
+    "builds": [
+      {
+        "src": "package.json",
+        "use": "@vercel/next"
+      }
+    ],
+    "regions": ["iad1"]
+  },
+
+  "next.config.js": {
+    "content": "/** @type {import('next').NextConfig} */\nconst nextConfig = {\n  reactStrictMode: true,\n  swcMinify: true,\n};\n\nmodule.exports = nextConfig;"
+  },
+
+  "postcss.config.js": {
+    "content": "module.exports = {\n  plugins: {\n    tailwindcss: {},\n    autoprefixer: {},\n  },\n};"
+  },
+
+  "tailwind.config.js": {
+    "content": "/** @type {import('tailwindcss').Config} */\nmodule.exports = {\n  content: [\n    './pages/**/*.{js,ts,jsx,tsx,mdx}',\n    './components/**/*.{js,ts,jsx,tsx,mdx}',\n  ],\n  theme: {\n    extend: {},\n  },\n  plugins: [],\n};"
+  },
+
+  ".env.local": {
+    "content": "# Add your environment variables here\n# Do not commit this file\nNEXT_PUBLIC_API_URL=http://localhost:3000"
+  },
+
+  ".gitignore": {
+    "content": "# dependencies\nnode_modules\n/.pnp\n.pnp.js\n\n# testing\n/coverage\n\n# next.js\n/.next/\n/out/\n\n# production\n/build\n\n# misc\n.DS_Store\n*.pem\n\n# debug\nnpm-debug.log*\nyarn-debug.log*\nyarn-error.log*\n\n# local env files\n.env*.local\n\n# vercel\n.vercel\n\n# typescript\n*.tsbuildinfo\nnext-env.d.ts"
   }
 }
